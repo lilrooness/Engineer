@@ -6,45 +6,37 @@ Map::Map() {
 
 }
 
-map_dims Map::loadMap(const char* filename) {
-    int lines = 0;
+map_dims Map::loadMap(const char *filename) {
+    ifstream in;
+    vector<string> lines;
+    in.open(filename);
     string line;
-    ifstream mapFile;
-    mapFile.open(filename);
+    map_dims dims;
 
-    while(mapFile.good()){
-        getline(mapFile, line);
-        lines++;
+    if(!in.is_open()) {
+        cout<<"Could not open level file: "<<filename<<endl;
+        return dims;
     }
 
-    mapFile.close();
-    mapFile.open(filename);
-    int counter = 0;
-    vector<string> lineArray(lines);
-
-    while(mapFile.good()){
-        getline(mapFile, lineArray[counter++]);
+    while(getline(in, line)) {;
+        lines.push_back(line);
     }
 
-    mapFile.close();
-    int length = lineArray[0].size();
+    int rows = lines.size();
+    int cols = lines.at(0).size();
 
-    //create new 2D int array
-    map = new int *[lines - 1];
+    dims.cols = cols;
+    dims.rows = rows;
 
-    for(int i=0; i<lines - 1; i++){
-        map[i] = new int[length];
-    }
+    this->map = new int*[rows];
 
-    for(int i=0; i<lines - 1; i++){
-        for(int j=0; j<length; j++){
-            map[i][j] = lineArray[i][j] - '0';
+    for(int i=0; i<rows; i++) {
+        map[i] = new int[cols];
+        for(int j=0; j<cols; j++) {
+            map[i][j] = lines.at(i).at(j) - '0';
         }
     }
 
-    map_dims dim;
-    dim.rows = lines - 1;
-    dim.cols = length;
+    return dims;
 
-    return dim;
 }
