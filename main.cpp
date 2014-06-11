@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #include "map.h"
 
@@ -12,12 +13,13 @@ int main(int argc, char *argv[]) {
     SDL_Event event;
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 
-    SDL_Surface *tile_surface = SDL_LoadBMP("gfx/tile.bmp");
-    SDL_Texture *tile = SDL_CreateTextureFromSurface(renderer, tile_surface);
+    SDL_Surface *tileset_surface = SDL_LoadBMP("gfx/engineer_tileset.bmp");
+    SDL_Texture *tileset = SDL_CreateTextureFromSurface(renderer, tileset_surface);
+    SDL_FreeSurface(tileset_surface);
 
     Map map;
 
-    map.loadMap("levels/map.level");
+    map_dims dims = map.loadMap("levels/map.level");
 
     while(isRunning) {
 
@@ -26,6 +28,14 @@ int main(int argc, char *argv[]) {
             switch(event.type) {
                 case SDL_QUIT: {
                     isRunning = false;
+                }
+            }
+        }
+
+        for(int y=0; y<dims.rows; y++) {
+            for(int x=0; x<dims.cols; x++) {
+                switch(map.map[y][x]) {
+                    //render tiles
                 }
             }
         }
