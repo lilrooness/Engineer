@@ -8,6 +8,7 @@ class Subject {
 public:
     Subject();
     std::vector<Observer*> observers;
+    void addObserver(Observer *observer);
 };
 
 #endif // SUBJECT_H
