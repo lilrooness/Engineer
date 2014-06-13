@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 
     SDL_Surface *tileset_surface = SDL_LoadBMP("gfx/engineer_tileset.bmp");
+
     SDL_Texture *tileset = SDL_CreateTextureFromSurface(renderer, tileset_surface);
     SDL_FreeSurface(tileset_surface);
 
