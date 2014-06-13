@@ -2,4 +2,6 @@
 *.pro
 .DS_STORE
 Makefile
+CMakeLists.txt
+build
 
