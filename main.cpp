@@ -11,9 +11,15 @@
 #define WINDOW_W 640
 #define WINDOW_H 480
 
+#define TILE_DIM 60
+#define SHEET_TILE_DIM 16
+
+#define LARGE_SPRITE_DIM 80 // 16 * 5
+
 using namespace std;
 
 int main(int argc, char *argv[]) {
+
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_PNG);
 
@@ -46,13 +52,13 @@ int main(int argc, char *argv[]) {
 
     SDL_Rect src_rect;
 
-    src_rect.w = 16;
-    src_rect.h = 16;
+    src_rect.w = SHEET_TILE_DIM;
+    src_rect.h = SHEET_TILE_DIM;
 
     SDL_Rect dst_rect;
 
-    dst_rect.w = 30;
-    dst_rect.h = 30;
+    dst_rect.w = TILE_DIM;
+    dst_rect.h = TILE_DIM;
 
     SDL_Rect ptcl_dst;
     ptcl_dst.w = 16;
@@ -60,15 +66,15 @@ int main(int argc, char *argv[]) {
 
     int half_way = WINDOW_W / 2;
 
-    int h_ratio = WINDOW_H / 80;
+    int h_ratio = WINDOW_H / LARGE_SPRITE_DIM;
 
     SDL_Rect torch_dst;
     torch_dst.x = half_way - ((80*h_ratio) / 2);
     torch_dst.y = 0;
-    torch_dst.w = 80 * h_ratio;
-    torch_dst.h = 80 * h_ratio;
+    torch_dst.w = LARGE_SPRITE_DIM * h_ratio;
+    torch_dst.h = LARGE_SPRITE_DIM * h_ratio;
 
-    TorchAnimation torch_animation(0, 0, 80, 80, 100);
+    TorchAnimation torch_animation(0, 0, LARGE_SPRITE_DIM, LARGE_SPRITE_DIM, 100);
 
     SDL_Rect ambient_light_src;
     ambient_light_src.x = 0;
@@ -102,10 +108,10 @@ int main(int argc, char *argv[]) {
         for(int y=0; y<dims.rows; y++) {
             for(int x=0; x<dims.cols; x++) {
                 grid_point point = map.id_map[map.unsigned_map[y][x]];
-                src_rect.x = point.x * 16;
-                src_rect.y = point.y * 16;
-                dst_rect.x = x * 30;
-                dst_rect.y = y * 30;
+                src_rect.x = point.x * SHEET_TILE_DIM;
+                src_rect.y = point.y * SHEET_TILE_DIM;
+                dst_rect.x = x * TILE_DIM;
+                dst_rect.y = y * TILE_DIM;
                 SDL_RenderCopy(renderer, tileset, &src_rect, &dst_rect);
             }
         }
