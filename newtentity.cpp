@@ -27,5 +27,4 @@ void NewtEntity::update(int delay) {
 
     xpos += xvel * delay;
     ypos += yvel * delay;
-
 }
