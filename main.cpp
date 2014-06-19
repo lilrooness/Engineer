@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
             }
         }
 
-        game_renderer.render();
+        game_renderer.render(game);
     }
 
     game_renderer.quit();

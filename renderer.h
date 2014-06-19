@@ -12,7 +12,7 @@ class Renderer {
 public:
     Renderer();
 
-    void render();
+    void render(Game game);
     void renderAnimations();
     void quit();
 

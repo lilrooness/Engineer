@@ -4,7 +4,9 @@
 class Entity
 {
 public:
-    Entity();
+    Entity(int x, int y, int sprite_id);
+    int sprite_id;
+    int x, y;
 };
 
 #endif // ENTITY_H

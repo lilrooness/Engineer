@@ -6,6 +6,7 @@
 #include "subject.h"
 #include "particlesystem.h"
 #include "map.h"
+#include "player.h"
 
 class Game : public Subject {
 public:
@@ -13,6 +14,7 @@ public:
     ParticleSystem system;
     void tick(int delay);
     Map map;
+    Player player;
 };
 
 #endif // GAME_H
