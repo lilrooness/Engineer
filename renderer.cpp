@@ -16,8 +16,6 @@ Renderer::Renderer() {
     this->tileset = SDL_CreateTextureFromSurface(renderer, tileset_surface);
     this->spritesheet = SDL_CreateTextureFromSurface(renderer, spritesheet_surface);
 
-    this->dims = game.map.loadBinaryMap("levels/map.bin");
-
     this->src_rect.w = SHEET_TILE_DIM;
     this->src_rect.h = SHEET_TILE_DIM;
 
@@ -27,8 +25,8 @@ Renderer::Renderer() {
 
 void Renderer::render(Game game) {
     //draw map
-    for(int y=0; y<dims.rows; y++) {
-        for(int x=0; x<dims.cols; x++) {
+    for(int y=0; y<game.dims.rows; y++) {
+        for(int x=0; x<game.dims.cols; x++) {
             grid_point point = game.map.id_map[game.map.unsigned_map[y][x]];
             src_rect.x = point.x * SHEET_TILE_DIM;
             src_rect.y = point.y * SHEET_TILE_DIM;
@@ -38,11 +36,11 @@ void Renderer::render(Game game) {
         }
     }
 
-    renderAnimations();
+    renderAnimations(game);
     SDL_RenderPresent(renderer);
 }
 
-void Renderer::renderAnimations() {
+void Renderer::renderAnimations(Game game) {
     for(int i=0; i<animations.size(); i++) {
         SDL_Rect animation_frame = animations.at(i)->getAnimationFrame(SDL_GetTicks());
         SDL_Rect dst_rect = animations.at(i)->dst_rect;

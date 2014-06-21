@@ -6,11 +6,15 @@ Game::Game() {
     map.loadBinaryMap("levels/map.bin");
     this->system = ParticleSystem(640, 480);
     this->player = Player(5, 5, 3);
-    for(int i=0; i<system.particles.size(); i++) {
-        cout<<system.particles.at(i).xpos<<endl;
-    }
+    this->dims = map.loadBinaryMap("levels/map.bin");
 }
 
 void Game::tick(int delay) {
     system.update_all(delay);
+
+    while(commands.size() > 0) {
+        commands.front()->execute(&player);
+        delete commands.front();
+        commands.pop();
+    }
 }

@@ -15,7 +15,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER);
 
     int time_now = 0;
     int time_last = 0;
@@ -40,6 +40,27 @@ int main(int argc, char *argv[]) {
             switch(event.type) {
                 case SDL_QUIT: {
                     isRunning = false;
+                }
+                case SDL_KEYUP: {
+                    switch(event.key.keysym.sym) {
+                    case SDLK_w: {
+                        MoveCommand* command = new MoveCommand('w');
+                        game.commands.push(command);
+                    }break;
+                    case SDLK_a: {
+                        MoveCommand* command = new MoveCommand('a');
+                        game.commands.push(command);
+                    }break;
+                    case SDLK_s: {
+                        MoveCommand* command = new MoveCommand('s');
+                        game.commands.push(command);
+                    }break;
+                    case SDLK_d: {
+                        MoveCommand* command = new MoveCommand('d');
+                        game.commands.push(command);
+                    }break;
+
+                    }
                 }
             }
         }

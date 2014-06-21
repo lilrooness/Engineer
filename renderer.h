@@ -18,7 +18,7 @@ public:
     Renderer();
 
     void render(Game game);
-    void renderAnimations();
+    void renderAnimations(Game game);
     void quit();
 
     std::vector<Animation*> animations;
@@ -27,8 +27,6 @@ public:
     SDL_Texture *spritesheet;
     SDL_Renderer *renderer;
     SDL_Window *window;
-
-    Game game;
 
 //    Map map;
     map_dims dims;
