@@ -6,7 +6,7 @@ using namespace std;
 
 Renderer::Renderer() {
     IMG_Init(IMG_INIT_PNG);
-    this->window = SDL_CreateWindow("Engineer", 0, 0, 640, 480, 0);
+    this->window = SDL_CreateWindow("Engineer", 10, 10, 640, 480, 0);
     this->renderer = SDL_CreateRenderer(window, -1, 0);
     SDL_Surface *tileset_surface = SDL_LoadBMP("gfx/engineer_tileset.bmp");
     SDL_Surface *spritesheet_surface = IMG_Load("gfx/spritesheet.png");

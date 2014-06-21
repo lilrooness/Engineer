@@ -1,7 +1,10 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
-
+#ifdef WIN32
+#include <SDL.h>
+#else
 #include <SDL2/SDL.h>
+#endif
 
 #include "constants.h"
 

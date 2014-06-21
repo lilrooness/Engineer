@@ -4,4 +4,8 @@
 Makefile
 CMakeLists.txt
 build
-
+*.cbp
+bin
+obj
+*.dll
+*.depend

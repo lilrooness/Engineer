@@ -2,7 +2,12 @@
 #define RENDERER_H
 
 #include <vector>
+
+#ifdef WIN32
+#include <SDL_image.h>
+#else
 #include <SDL2/SDL_image.h>
+#endif
 
 #include "animation.h"
 #include "map.h"
