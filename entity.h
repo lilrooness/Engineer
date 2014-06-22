@@ -5,6 +5,7 @@ class Entity
 {
 public:
     Entity(int x, int y, int sprite_id);
+    Entity();
     int sprite_id;
     int x, y;
 };

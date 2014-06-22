@@ -25,13 +25,19 @@ Renderer::Renderer() {
 
 void Renderer::render(Game game) {
     //draw map
-    for(int y=0; y<game.dims.rows; y++) {
-        for(int x=0; x<game.dims.cols; x++) {
-            grid_point point = game.map.id_map[game.map.unsigned_map[y][x]];
+    for(int y=game.camera.y; y<game.dims.rows; y++) {
+        for(int x=game.camera.x; x<game.dims.cols; x++) {
+                grid_point point;
+            if(x >= 0 && y >= 0 && x < game.dims.cols && y < game.dims.rows) {
+                point = game.map.id_map[game.map.unsigned_map[y][x]];
+            } else {
+                point.x = 3;
+                point.y = 1;
+            }
             src_rect.x = point.x * SHEET_TILE_DIM;
             src_rect.y = point.y * SHEET_TILE_DIM;
-            dst_rect.x = x * TILE_DIM;
-            dst_rect.y = y * TILE_DIM;
+            dst_rect.x = (x - game.camera.x) * TILE_DIM;
+            dst_rect.y = (y - game.camera.y) * TILE_DIM;
             SDL_RenderCopy(renderer, tileset, &src_rect, &dst_rect);
         }
     }
@@ -56,8 +62,8 @@ void Renderer::renderAnimations(Game game) {
     player_src.x = player_point.x * SHEET_TILE_DIM;
     player_src.y = player_point.y * SHEET_TILE_DIM;
 
-    player_dst.x = game.player.x * TILE_DIM;
-    player_dst.y = game.player.y * TILE_DIM;
+    player_dst.x = (game.player.x - game.camera.x) * (TILE_DIM);
+    player_dst.y = (game.player.y - game.camera.y) * (TILE_DIM);
     player_dst.w = TILE_DIM;
     player_dst.h = TILE_DIM;
 

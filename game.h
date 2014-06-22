@@ -10,6 +10,7 @@
 #include "player.h"
 #include "command.h"
 #include "movecommand.h"
+#include "entity.h"
 
 class Game : public Subject {
 public:
@@ -21,6 +22,7 @@ public:
 
     std::queue<Command*> commands;
     map_dims dims;
+    Entity camera;
 
 };
 
