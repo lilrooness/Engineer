@@ -17,6 +17,14 @@ int main(int argc, char *argv[]) {
 
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER);
 
+    SDL_GameController *controller = SDL_GameControllerOpen(0);
+
+    if(controller != NULL) {
+        cout<<"Using profile: "<<SDL_GameControllerName(controller)<<endl;
+    } else {
+        cout<<"No profiled controller connected"<<endl;
+    }
+
     int time_now = 0;
     int time_last = 0;
     int delay = time_now - time_last;
@@ -61,7 +69,30 @@ int main(int argc, char *argv[]) {
                     }break;
 
                     }
-                }
+                }break;
+                case SDL_CONTROLLERBUTTONDOWN: {
+                    switch(event.cbutton.button) {
+                        case SDL_CONTROLLER_BUTTON_DPAD_UP: {
+                            MoveCommand *command = new MoveCommand('w');
+                            game.commands.push(command);
+                        }break;
+                        case SDL_CONTROLLER_BUTTON_DPAD_LEFT: {
+                            MoveCommand *command = new MoveCommand('a');
+                            game.commands.push(command);
+                        }break;
+                        case SDL_CONTROLLER_BUTTON_DPAD_DOWN: {
+                            MoveCommand *command = new MoveCommand('s');
+                            game.commands.push(command);
+                        }break;
+                        case SDL_CONTROLLER_BUTTON_DPAD_RIGHT: {
+                            MoveCommand *command = new MoveCommand('d');
+                            game.commands.push(command);
+                        }
+
+                    }
+
+                }break;
+                default:{}break;
             }
         }
 

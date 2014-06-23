@@ -25,8 +25,8 @@ Renderer::Renderer() {
 
 void Renderer::render(Game game) {
     //draw map
-    for(int y=game.camera.y; y<game.dims.rows; y++) {
-        for(int x=game.camera.x; x<game.dims.cols; x++) {
+    for(int y=game.camera.y; y<(WINDOW_H / TILE_DIM)+game.camera.y; y++) {
+        for(int x=game.camera.x; x<(WINDOW_W / TILE_DIM)+game.camera.x; x++) {
                 grid_point point;
             if(x >= 0 && y >= 0 && x < game.dims.cols && y < game.dims.rows) {
                 point = game.map.id_map[game.map.unsigned_map[y][x]];
