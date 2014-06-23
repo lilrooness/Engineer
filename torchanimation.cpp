@@ -11,10 +11,16 @@ TorchAnimation::TorchAnimation(int x, int y, int width, int height, int delay) :
     int h_ratio = WINDOW_H / LARGE_SPRITE_DIM;
 
 
-    this->dst_rect.x = half_way - ((80*h_ratio) / 2);
-    this->dst_rect.y = 0;
-    this->dst_rect.w = LARGE_SPRITE_DIM * h_ratio;
-    this->dst_rect.h = LARGE_SPRITE_DIM * h_ratio;
+    //this->dst_rect.x = half_way - ((80*h_ratio) / 2);
+    //this->dst_rect.y = 0;
+    //this->dst_rect.w = LARGE_SPRITE_DIM * h_ratio;
+    //this->dst_rect.h = LARGE_SPRITE_DIM * h_ratio;
+
+    //this gets rid of the bars of map on the left and right sides of the screen
+    dst_rect.x = 0;
+    dst_rect.y = 0;
+    dst_rect.w = WINDOW_W;
+    dst_rect.h = WINDOW_H;
 }
 
 SDL_Rect TorchAnimation::getAnimationFrame(int now) {
