@@ -10,3 +10,7 @@ obj
 *.dll
 *.depend
 *.layout
+.classpath
+.project
+.settings
+Map_Creator/bin
